@@ -1,21 +1,65 @@
-<h1>Vamos que lo sacamos</h1>
+<div class="container">
+  <h1 class="header-main">Formación especializada para la Transformación Digital en el sector de la Salud y las Biociencias</h1>
+  <h3 class="header-sub">Módulo 3: Desarrollo de Plataformas Digitales en Biociencias y Salud</h3>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ol class="module-list">
+    <li>Submódulo 3.2: Introducción al Desarrollo Backend</li>
+    <li>Submódulo 3.3: Bases de Datos para el Sector Salud en Desarrollo Backend</li>
+    <li>Submódulo 3.4: Comunicación entre Frontend y Backend</li>
+    <li>Submódulo 3.5: Desarrollo de APIs en Backend</li>
+  </ol>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
+  <!-- TABLE -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!-- Url Column -->
-  <ng-container matColumnDef="url">
-    <th mat-header-cell *matHeaderCellDef> Url </th>
-    <td mat-cell *matCellDef="let element"> {{element.url}} </td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="warn" (click)="deleteItem(element.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- FORM -->
+  <form (ngSubmit)="onSubmit(stockForm)" #stockForm="ngForm" class="form-container">
+    <mat-form-field>
+      <input matInput placeholder="Name" name="name" ngModel required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Quantity" name="quantity" ngModel required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Price" name="price" ngModel required>
+    </mat-form-field>
+    <button mat-raised-button type="submit">Add Item</button>
+  </form>
+
+  <!-- FILTER -->
+  <mat-form-field class="filter-container">
+    <input matInput #filterInput placeholder="Filter by Name">
+  </mat-form-field>
+  <button mat-raised-button (click)="applyFilter(filterInput.value)" class="filter-button">Filter</button>
+</div>
 
